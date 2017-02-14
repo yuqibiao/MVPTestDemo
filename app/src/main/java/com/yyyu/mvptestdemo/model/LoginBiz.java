@@ -19,7 +19,7 @@ public class LoginBiz  implements  ILoginBiz{
 
     private OnLoginListener mOnLoginListener;
 
-    private Handler mHander = new Handler(){
+    private Handler mHandler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -54,12 +54,12 @@ public class LoginBiz  implements  ILoginBiz{
                         Message msg = new Message();
                         msg.arg1 = LOGIN_SUCCESS;
                         msg.obj = user;
-                        mHander.sendMessage(msg);
+                        mHandler.sendMessage(msg);
                     }else{
                         Message msg = new Message();
                         msg.arg1 = LOGIN_FAILED;
                         msg.obj = "登录失败！密码错误";
-                        mHander.sendMessage(msg);
+                        mHandler.sendMessage(msg);
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();

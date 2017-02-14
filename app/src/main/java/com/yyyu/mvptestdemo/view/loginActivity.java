@@ -1,63 +1,62 @@
 package com.yyyu.mvptestdemo.view;
 
 import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.yyyu.mvptestdemo.R;
 import com.yyyu.mvptestdemo.bean.User;
 import com.yyyu.mvptestdemo.presenter.LoginPresenter;
+import com.yyyu.mvptestdemo.utils.ToastUtil;
 
-public class loginActivity extends AppCompatActivity implements  ILoginView{
+import javax.inject.Inject;
 
-    private EditText etUsername;
-    private EditText etPwd;
-    private Button btnLogin;
-    private Button btnClear;
+import butterknife.BindView;
+import butterknife.OnClick;
+
+public class LoginActivity extends BaseActivity implements ILoginView {
+
+    @BindView(R.id.et_username)
+    EditText etUsername;
+    @BindView(R.id.et_pwd)
+    EditText etPwd;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+    @BindView(R.id.btn_clear)
+    Button btnClear;
+
+    @Inject
     private LoginPresenter mLoginPresenter;
+    @Inject
+    private ToastUtil tostUtils;
+
     private ProgressDialog loadingDialog;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        init();
+    protected int getLayoutId() {
+        return R.layout.activity_login;
     }
 
-    private void init() {
-        mLoginPresenter = new LoginPresenter(this);
-        initView();
-        initListener();
-    }
-
-    private void initView() {
-        etUsername = (EditText) findViewById(R.id.et_username);
-        etPwd = (EditText) findViewById(R.id.et_pwd);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnClear = (Button) findViewById(R.id.btn_clear);
-
-        loadingDialog = new ProgressDialog(this);
+    @Override
+    protected void initView() {
+      /*  DaggerLoginActivityComponent.builder()
+                .baseActitivtyComponent(getmBaseActCom())
+                .loginActivityModule(new LoginActivityModule(this))
+                .build();*/
+       // loadingDialog = new ProgressDialog(this);
         loadingDialog.setTitle("登录中....");
     }
 
-    private void initListener() {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mLoginPresenter.login();
-            }
-        });
 
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mLoginPresenter.clear();
-            }
-        });
+    @OnClick(value = R.id.btn_login)
+    public void toLogin(View v){
+        mLoginPresenter.login();
+    }
+
+    @OnClick(value = R.id.btn_clear)
+    public void toClear(View v){
+        mLoginPresenter.clear();
     }
 
 
@@ -83,12 +82,13 @@ public class loginActivity extends AppCompatActivity implements  ILoginView{
 
     @Override
     public void toMainActivity(User user) {
-        MainActivity.startAction(this , user.getUsername());
+        MainActivity.startAction(this, user.getUsername());
     }
 
     @Override
     public void showFailedToast(String str) {
-        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+        tostUtils.showToast("登录失败---来着IOC");
+        //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
     @Override
