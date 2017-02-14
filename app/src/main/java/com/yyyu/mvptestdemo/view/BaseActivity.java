@@ -7,6 +7,9 @@ import com.yyyu.mvptestdemo.MyApplication;
 import com.yyyu.mvptestdemo.di.component.BaseActivityComponent;
 import com.yyyu.mvptestdemo.di.component.DaggerBaseActivityComponent;
 import com.yyyu.mvptestdemo.di.module.BaseActivityModule;
+import com.yyyu.mvptestdemo.utils.ToastUtil;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -17,6 +20,9 @@ import butterknife.ButterKnife;
  */
 
 public abstract  class BaseActivity extends AppCompatActivity{
+
+    @Inject
+    protected ToastUtil tostUtils;
 
     private BaseActivityComponent mBaseActCom;
 

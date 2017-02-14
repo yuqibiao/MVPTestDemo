@@ -1,6 +1,7 @@
 package com.yyyu.mvptestdemo.di.component;
 
 import com.yyyu.mvptestdemo.di.module.LoginActivityModule;
+import com.yyyu.mvptestdemo.view.LoginActivity;
 
 import dagger.Component;
 
@@ -13,6 +14,6 @@ import dagger.Component;
 @Component(dependencies = BaseActivityComponent.class , modules = {LoginActivityModule.class})
 public interface LoginActivityComponent {
 
-    //void inject(LoginActivity activity);
+    void inject(LoginActivity activity);
 
 }

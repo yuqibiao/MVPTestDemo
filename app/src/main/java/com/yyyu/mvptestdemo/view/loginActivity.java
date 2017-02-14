@@ -7,8 +7,9 @@ import android.widget.EditText;
 
 import com.yyyu.mvptestdemo.R;
 import com.yyyu.mvptestdemo.bean.User;
+import com.yyyu.mvptestdemo.di.component.DaggerLoginActivityComponent;
+import com.yyyu.mvptestdemo.di.module.LoginActivityModule;
 import com.yyyu.mvptestdemo.presenter.LoginPresenter;
-import com.yyyu.mvptestdemo.utils.ToastUtil;
 
 import javax.inject.Inject;
 
@@ -27,10 +28,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     Button btnClear;
 
     @Inject
-    private LoginPresenter mLoginPresenter;
-    @Inject
-    private ToastUtil tostUtils;
-
+    LoginPresenter mLoginPresenter;
     private ProgressDialog loadingDialog;
 
     @Override
@@ -40,21 +38,22 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     protected void initView() {
-      /*  DaggerLoginActivityComponent.builder()
-                .baseActitivtyComponent(getmBaseActCom())
+        DaggerLoginActivityComponent.builder()
+                .baseActivityComponent(getmBaseActCom())
                 .loginActivityModule(new LoginActivityModule(this))
-                .build();*/
-       // loadingDialog = new ProgressDialog(this);
+                .build()
+                .inject(this);
+        loadingDialog = new ProgressDialog(this);
         loadingDialog.setTitle("登录中....");
     }
 
 
-    @OnClick(value = R.id.btn_login)
+    @OnClick(R.id.btn_login)
     public void toLogin(View v){
         mLoginPresenter.login();
     }
 
-    @OnClick(value = R.id.btn_clear)
+    @OnClick(R.id.btn_clear)
     public void toClear(View v){
         mLoginPresenter.clear();
     }
