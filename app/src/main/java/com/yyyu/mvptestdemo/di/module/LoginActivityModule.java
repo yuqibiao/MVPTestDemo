@@ -1,7 +1,12 @@
 package com.yyyu.mvptestdemo.di.module;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+
 import com.yyyu.mvptestdemo.presenter.LoginPresenter;
 import com.yyyu.mvptestdemo.view.ILoginView;
+import com.yyyu.mvptestdemo.view.LoginActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -15,10 +20,10 @@ import dagger.Provides;
 @Module
 public class LoginActivityModule {
 
-    private ILoginView mLoginView;
+    private LoginActivity mLoginActivity;
 
-    public LoginActivityModule(ILoginView mLoginView) {
-        this.mLoginView = mLoginView;
+    public LoginActivityModule(LoginActivity activity) {
+        this.mLoginActivity = activity;
     }
 
     @Provides
@@ -28,7 +33,17 @@ public class LoginActivityModule {
 
     @Provides
     ILoginView provideILoginView(){
-        return mLoginView;
+        return mLoginActivity;
+    }
+
+    @Provides
+    ProgressDialog provideProgressDialog(Context context){
+        return new ProgressDialog(context);
+    }
+
+    @Provides
+    Context provideContext(Activity activity){
+        return activity;
     }
 
 }

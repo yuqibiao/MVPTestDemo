@@ -12,6 +12,7 @@ import com.yyyu.mvptestdemo.utils.ToastUtil;
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * 功能：基类Activity
@@ -22,15 +23,16 @@ import butterknife.ButterKnife;
 public abstract  class BaseActivity extends AppCompatActivity{
 
     @Inject
-    protected ToastUtil tostUtils;
+    protected ToastUtil toastUtils;
 
     private BaseActivityComponent mBaseActCom;
+    private Unbinder mUnbind;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+        mUnbind = ButterKnife.bind(this);
         init();
     }
 
@@ -45,11 +47,17 @@ public abstract  class BaseActivity extends AppCompatActivity{
         mBaseActCom = DaggerBaseActivityComponent
                 .builder()
                 .applicationComponent( ( (MyApplication) getApplication() ) .getmAppCom())
-                .baseActivityModule(new BaseActivityModule())
+                .baseActivityModule(new BaseActivityModule(this))
                 .build();
     }
 
     protected abstract void initView();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbind.unbind();
+    }
 
     public BaseActivityComponent getmBaseActCom() {
         return mBaseActCom;
