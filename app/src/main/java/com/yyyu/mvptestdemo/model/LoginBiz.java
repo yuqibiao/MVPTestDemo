@@ -5,6 +5,8 @@ import android.os.Message;
 import android.widget.EditText;
 
 import com.yyyu.mvptestdemo.bean.User;
+import com.yyyu.mvptestdemo.model.inter.ILoginBiz;
+import com.yyyu.mvptestdemo.callback.OnLoginListener;
 
 /**
  * 功能：登录操作业务逻辑接口实现类
@@ -12,7 +14,7 @@ import com.yyyu.mvptestdemo.bean.User;
  * Created by yyyu on 2017/2/10.
  */
 
-public class LoginBiz  implements  ILoginBiz{
+public class LoginBiz  implements ILoginBiz {
 
     private static final int LOGIN_SUCCESS = 100;
     private static final int LOGIN_FAILED = 101;

@@ -2,16 +2,22 @@ package com.yyyu.mvptestdemo.view;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.widget.TextView;
+import android.view.View;
 
 import com.yyyu.mvptestdemo.R;
+import com.yyyu.mvptestdemo.di.component.DaggerMainActivityComponent;
+import com.yyyu.mvptestdemo.di.module.MainActivityModule;
+import com.yyyu.mvptestdemo.presenter.MainPresenter;
+import com.yyyu.mvptestdemo.view.inter.IMainView;
 
-import butterknife.BindView;
+import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity {
+import butterknife.OnClick;
 
-    @BindView(R.id.tv_info)
-    TextView tvInfo;
+public class MainActivity extends BaseActivity  implements IMainView{
+
+    @Inject
+    MainPresenter mMainPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -20,8 +26,32 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        String username = getIntent().getStringExtra("username");
-        tvInfo.setText("用户名是：" + username);
+        DaggerMainActivityComponent
+                .builder()
+                .baseActivityComponent(getmBaseActCom())
+                .mainActivityModule( new MainActivityModule(this))
+                .build()
+                .inject(this);
+    }
+
+    @OnClick({R.id.btn_get, R.id.btn_post, R.id.btn_json})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_get:
+                mMainPresenter.doGetData("Guolei1130");
+                break;
+            case R.id.btn_post:
+                mMainPresenter.doPostData();
+                break;
+            case R.id.btn_json:
+                mMainPresenter.getJsonData();
+                break;
+        }
+    }
+
+    @Override
+    public void showTipToast(String tip) {
+        toastUtils.showToast(tip);
     }
 
     public static void startAction(Activity activity, String username) {
@@ -29,5 +59,4 @@ public class MainActivity extends BaseActivity {
         intent.putExtra("username", username);
         activity.startActivity(intent);
     }
-
 }

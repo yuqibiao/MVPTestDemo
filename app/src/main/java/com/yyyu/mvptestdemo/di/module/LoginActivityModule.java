@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 
 import com.yyyu.mvptestdemo.presenter.LoginPresenter;
-import com.yyyu.mvptestdemo.view.ILoginView;
+import com.yyyu.mvptestdemo.view.inter.ILoginView;
 import com.yyyu.mvptestdemo.view.LoginActivity;
 
 import dagger.Module;

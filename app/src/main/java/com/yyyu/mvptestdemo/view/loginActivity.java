@@ -1,6 +1,8 @@
 package com.yyyu.mvptestdemo.view;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +12,7 @@ import com.yyyu.mvptestdemo.bean.User;
 import com.yyyu.mvptestdemo.di.component.DaggerLoginActivityComponent;
 import com.yyyu.mvptestdemo.di.module.LoginActivityModule;
 import com.yyyu.mvptestdemo.presenter.LoginPresenter;
+import com.yyyu.mvptestdemo.view.inter.ILoginView;
 
 import javax.inject.Inject;
 
@@ -17,6 +20,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
+
+    private static final String TAG = "LoginActivity";
 
     @BindView(R.id.et_username)
     EditText etUsername;
@@ -29,7 +34,10 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Inject
     LoginPresenter mLoginPresenter;
-    private ProgressDialog loadingDialog;
+    @Inject
+    ProgressDialog loadingDialog;
+    @Inject
+    Context mContext;
 
     @Override
     protected int getLayoutId() {
@@ -43,14 +51,13 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                 .loginActivityModule(new LoginActivityModule(this))
                 .build()
                 .inject(this);
-        loadingDialog = new ProgressDialog(this);
         loadingDialog.setTitle("登录中....");
     }
-
 
     @OnClick(R.id.btn_login)
     public void toLogin(View v){
         mLoginPresenter.login();
+        Log.e(TAG, "toLogin: ====Context=="+mContext );
     }
 
     @OnClick(R.id.btn_clear)
@@ -86,7 +93,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void showFailedToast(String str) {
-        tostUtils.showToast("登录失败---来着IOC");
+        toastUtils.showToast("登录失败---来着IOC");
         //Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 

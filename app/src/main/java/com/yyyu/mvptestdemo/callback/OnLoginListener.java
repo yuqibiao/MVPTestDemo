@@ -1,4 +1,4 @@
-package com.yyyu.mvptestdemo.model;
+package com.yyyu.mvptestdemo.callback;
 
 import com.yyyu.mvptestdemo.bean.User;
 

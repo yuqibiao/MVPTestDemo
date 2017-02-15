@@ -1,4 +1,4 @@
-package com.yyyu.mvptestdemo.view;
+package com.yyyu.mvptestdemo.view.inter;
 
 import android.widget.EditText;
 

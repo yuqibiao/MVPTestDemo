@@ -1,6 +1,8 @@
-package com.yyyu.mvptestdemo.model;
+package com.yyyu.mvptestdemo.model.inter;
 
 import android.widget.EditText;
+
+import com.yyyu.mvptestdemo.callback.OnLoginListener;
 
 /**
  * 功能：登录操作业务逻辑接口

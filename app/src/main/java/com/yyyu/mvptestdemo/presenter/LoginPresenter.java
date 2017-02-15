@@ -1,10 +1,10 @@
 package com.yyyu.mvptestdemo.presenter;
 
 import com.yyyu.mvptestdemo.bean.User;
-import com.yyyu.mvptestdemo.model.ILoginBiz;
+import com.yyyu.mvptestdemo.model.inter.ILoginBiz;
 import com.yyyu.mvptestdemo.model.LoginBiz;
-import com.yyyu.mvptestdemo.model.OnLoginListener;
-import com.yyyu.mvptestdemo.view.ILoginView;
+import com.yyyu.mvptestdemo.callback.OnLoginListener;
+import com.yyyu.mvptestdemo.view.inter.ILoginView;
 
 /**
  * 功能：登录操作Presenter

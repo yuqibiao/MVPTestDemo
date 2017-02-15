@@ -28,14 +28,22 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    /*------------------Dagger 依赖*/
+
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    /*------------------Dagger2 依赖*/
     compile 'com.google.dagger:dagger:2.4'
     apt 'com.google.dagger:dagger-compiler:2.4'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    /*------------------Dagger 依赖*/
-    compile 'com.google.code.gson:gson:2.8.0'
+    /*------------------Dagger2 依赖*/
+
     /*------------------ButterKnife8依赖*/
     compile 'com.jakewharton:butterknife:8.5.1'
     apt 'com.jakewharton:butterknife-compiler:8.5.1'//8.0增加此项配置
     /*------------------ButterKnife8依赖*/
+
+    /*------------------Retrofit2依赖*/
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'//对Gson的支持
+    /*------------------Retrofit2依赖*/
 }
