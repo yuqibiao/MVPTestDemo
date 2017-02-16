@@ -45,5 +45,11 @@ dependencies {
     /*------------------Retrofit2依赖*/
     compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'//对Gson的支持
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'//对Rxjava的支持
     /*------------------Retrofit2依赖*/
+
+    /*------------------RxJava依赖*/
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    /*------------------RxJava依赖*/
 }
